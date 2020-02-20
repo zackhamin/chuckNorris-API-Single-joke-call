@@ -48,13 +48,13 @@ class ViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Not Funny, Try Again!", style: .default))
         
         self.present(alertController, animated: true, completion: nil)
-       
+        
         
         fetchJokesJSON { [weak self] (res) in
             DispatchQueue.main.async {
                 switch res {
                 case .success(let welcome):
-                    self?.jokeOutLabel.text = welcome.value.joke
+                    self!.jokeOutLabel.text = welcome.value.joke
                 case .failure(let err):
                     print("Sorry, we are all laughed out! \(err)")
                 }
@@ -62,24 +62,8 @@ class ViewController: UIViewController {
         }
     }
     
-//    func jokeAlert() {
-//
-//    let alertController = UIAlertController(title: "This Is Funny", message:
-//                 "\(jokeOutLabel.text)", preferredStyle: .alert)
-//             alertController.addAction(UIAlertAction(title: " HAHAHA, Tell Me Another", style: .default))
-//             alertController.addAction(UIAlertAction(title: "Not Funny, Try Again!", style: .default))
-//
-//             self.present(alertController, animated: true, completion: nil)
-//
-//    }
-    
-    
     fileprivate func fetchJokesJSON(completion: @escaping (Result<Welcome, Error>) -> ()) {
         
-        //        let urlString = "http://api.icndb.com/jokes/random?firstName=Ishaq&amp;lastName=Amin"
-        
-        
-//        let urlString = "http://api.icndb.com/jokes/random"
         guard let url = URL(string: urlString) else {return}
         let urlRequest = URLRequest(url: url)
         
